@@ -5,9 +5,9 @@
 
 (defn app
   []
-  (if (:auth? @db/state)
-    [views/authenticated]
-    [views/public]))
+  [:f> views/declension-tag-select]
+  #_[views/word-display #:word.declension{:suffix "é"
+                                        :root "compr"}])
 
 ;; start is called by init and after code reloading finishes
 (defn ^:dev/after-load start []
