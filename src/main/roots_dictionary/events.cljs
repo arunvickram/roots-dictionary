@@ -1,5 +1,5 @@
-(ns tailwind.events
-  (:require [tailwind.db :as db]))
+(ns roots-dictionary.events
+  (:require [roots-dictionary.db :as db]))
 
 (defn login
   []
