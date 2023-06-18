@@ -9,12 +9,14 @@
 (def ComboboxOptions (.-Options Combobox))
 (def ComboboxOption (.-Option Combobox))
 
+(defn home-page [& args]
+  [:div
+   [:h2 "Hello"]])
+
 (defn ->tag-option [tag]
   [:> ComboboxOption {:key (:name tag)
                       :value tag}
-   [:div.p-5
-    (:text tag)]
-   ])
+   [:div.p-5 (:text tag)]])
 
 (defn ->tag-li [tag]
   [:li {:key (:name tag)}
@@ -56,11 +58,13 @@
     [:> ComboboxOptions
      (map ->tag-option tags)]]])
 
+(defn dictionary-entry-page [match]
+  [:div match])
+
 (defn word-display [word]
   [:div.flex.flex-1.flex-row.max-w.justify-center.text-5xl {:dir "ltr"}
-   [:span
-    {:after (or (:suffix word) "")
-     :before (or (:prefix word) "")
-     :class "font-bold before:content-[attr(before)] after:content-[attr(after)] before:text-red-500 after:text-blue-500"}
-    (:word.declension/root word)]
+   ;; (for [element [(:prefix word) (:root word) (:suffix word)]]
+   ;;   [:span {:class "font-bold before:content-[attr(before)] after:content-[attr(after)] before:text-red-500 after:text-blue-500"} element])
+   [:span.font-bold (:root word)]
+   [:span.font-bold.text-blue-500 (:suffix word)]
    [:button {:class "ltr:ml-3 rtl:mr-3"} "+"]])

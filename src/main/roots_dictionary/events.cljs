@@ -1,15 +1,10 @@
 (ns roots-dictionary.events
-  (:require [roots-dictionary.db :as db]))
+  (:require [roots-dictionary.db :as db]
+            [re-posh.core :as re-posh]))
 
-(defn login
-  []
-  (swap! db/state assoc :auth? true))
+(re-posh/reg-event-ds
+ ::initialize-db
+ (fn [_ _]
+   db/initial-db))
 
-(defn logout
-  []
-  (swap! db/state assoc :auth? false))
-
-(defn toggle-user-dropdown
-  []
-  (let [dropdown (:user-dropdown? @db/state)]
-    (swap! db/state assoc :user-dropdown? (not dropdown))))
+(re-posh/dispatch-sync [::initialize-db])

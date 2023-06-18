@@ -10,6 +10,12 @@
   {:target :browser
    :output-dir "public/js"
    :asset-path "/js"
+   :dev
+   {:build-hooks
+    [(teknql.tailwind/start-watch!)]}
+   :release
+   {:build-hooks
+    [(teknql.tailwind/compile-release!)]}
    :modules
    {:main
     {:init-fn roots-dictionary.app/init}}}}}
